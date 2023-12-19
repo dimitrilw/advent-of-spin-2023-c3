@@ -1,0 +1,52 @@
+spin_manifest_version = 2
+
+[application]
+name = "aos-chal-three"
+version = "0.1.0"
+authors = ["Dimitri <5898931+dimitrilw@users.noreply.github.com>"]
+description = "Fermyon advent-of-spin 2023, challenge 3"
+
+# --------------------------------------------------------------------------------------------------
+# root router = serve assets directory
+
+[[trigger.http]]
+route = "/..."
+component = "fs"
+
+[component.fs]
+files = [{ source = "assets", destination = "/" }]
+[component.fs.source]
+url = "https://github.com/fermyon/spin-fileserver/releases/download/v0.1.0/spin_static_fs.wasm"
+digest = "sha256:96c76d9af86420b39eb6cd7be5550e3cb5d4cc4de572ce0fd1f6a29471536cb4" 
+
+# --------------------------------------------------------------------------------------------------
+# /rust-api
+
+[[trigger.http]]
+route = "/rust-api/..."
+component = "rust-api"
+
+[component.rust-api]
+source = "rust-api/target/wasm32-wasi/release/rust_api.wasm"
+# allowed_outbound_hosts = []
+ai_models = ["llama2-chat"]
+[component.rust-api.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "rust-api"
+watch = ["src/**/*.rs", "Cargo.toml"]
+
+# --------------------------------------------------------------------------------------------------
+# /go-api
+
+# [[trigger.http]]
+# route = "/go-api/..."
+# component = "go-api"
+
+# [component.go-api]
+# source = "go-api/main.wasm"
+# # allowed_outbound_hosts = []
+# # ai_models = ["llama2-chat"]
+# [component.go-api.build]
+# command = "cp ../assets/styles.json ./styles.json && tinygo build -target=wasi -gc=leaking -no-debug -o main.wasm main.go"
+# workdir = "go-api"
+# watch = ["**/*.go", "go.mod"]
