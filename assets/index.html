@@ -1,130 +1,143 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Holiday Tales</title>
-    <link 
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
-    >
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+  </head>
+  <body>
     <main class="container">
-        <h2>A basic holiday story generator</h2>
+      <h2>A basic holiday story generator</h2>
 
-        <div class="form" id="formDiv">
-            <form id="storyForm">
-                <label for="place">Location</label>
-                <input 
-                    type="text" 
-                    id="place"
-                    name="place" 
-                    placeholder="Location where the story takes place" 
-                    required
-                > <!-- end input -->
+      <div class="form" id="formDiv">
+        <form id="storyForm">
+          <label for="place">Location</label>
+          <input
+            type="text"
+            id="place"
+            name="place"
+            placeholder="Location where the story takes place"
+            required
+          />
+          <!-- end input -->
 
-                <label for="characters">Characters</label>
-                <input 
-                    type="text" 
-                    id="characters"
-                    name="characters" 
-                    placeholder="Characters in the story" 
-                    required
-                > <!-- end input -->
-                <small>
-                    Use comma-separated-values to enter multiple characters. 
-                    For example:
-                    Santa, Rudolph, Frosty, Jack Frost, and the Grinch
-                </small>
+          <label for="characters">Characters</label>
+          <input
+            type="text"
+            id="characters"
+            name="characters"
+            placeholder="Characters in the story"
+            required
+          />
+          <!-- end input -->
+          <small>
+            Use comma-separated-values to enter multiple characters. For
+            example: Santa, Rudolph, Frosty, Jack Frost, and the Grinch
+          </small>
 
-                <label for="objects">Objects</label>
-                <input 
-                    type="text" 
-                    id="objects"
-                    name="objects" 
-                    placeholder="Objects in the story" 
-                    required
-                > <!-- end input -->
-                <small>
-                    Use comma-separated-values to enter multiple objects. 
-                    For example:
-                    a present, a tree, a snowman, a candy cane, and a stocking
-                </small>
+          <label for="objects">Objects</label>
+          <input
+            type="text"
+            id="objects"
+            name="objects"
+            placeholder="Objects in the story"
+            required
+          />
+          <!-- end input -->
+          <small>
+            Use comma-separated-values to enter multiple objects. For example: a
+            present, a tree, a snowman, a candy cane, and a stocking
+          </small>
 
-                <label for="style">Style (optional)</label>
-                <input 
-                    type="text" 
-                    id="style"
-                    name="style" 
-                    placeholder="Leave blank to use a random holiday story style" 
-                > <!-- end input -->
-                <small>
-                    Optionally give a story style. If you leave it blank,
-                    the generator will pick a random style from a list of styles.
-                    Example styles: 
-                    <br/>A Christmas Carol by Charles Dickens
-                    <br/>How the Grinch Stole Christmas by Dr. Seuss
-                    <br/>the screenplay for the movie Elf
-                </small>
+          <label for="style">Style (optional)</label>
+          <input
+            type="text"
+            id="style"
+            name="style"
+            placeholder="Leave blank to use a random holiday story style"
+          />
+          <!-- end input -->
+          <small>
+            Optionally give a story style. If you leave it blank, the generator
+            will pick a random style from a list of styles. Example styles:
+            <br />A Christmas Carol by Charles Dickens <br />How the Grinch
+            Stole Christmas by Dr. Seuss <br />the screenplay for the movie Elf
+          </small>
 
-                <label for="pickGenerator">Pick Generator</label>
-                <select id="pickGenerator">
-                    <option value="rust-api" selected>Rust API</option>
-                    <option value="go-api" disabled>Go API (in development)</option>
-                    <option value="python-api" disabled>Python API (in development)</option>
-                    <option value="javascript-api" disabled>Javascript API (in development)</option>
-                    <option value="typescript-api" disabled>Typescript API (in development)</option>
-                    <option value="component-api" disabled>Component-Model API (in development)</option>
-                </select>
+          <label for="pickGenerator">Pick Generator</label>
+          <select id="pickGenerator">
+            <option value="rust-api" selected>Rust API</option>
+            <option value="go-api">Go API</option>
+            <option value="python-api" disabled>
+              Python API (in development)
+            </option>
+            <option value="javascript-api" disabled>
+              Javascript API (in development)
+            </option>
+            <option value="typescript-api" disabled>
+              Typescript API (in development)
+            </option>
+            <option value="component-api" disabled>
+              Component-Model API (in development)
+            </option>
+          </select>
 
-                <!-- Button -->
-                <button type="submit" id="submitButton">Submit</button>
-            </form>
-        </div>
+          <!-- Button -->
+          <button type="submit" id="submitButton">Submit</button>
+        </form>
+      </div>
 
-        <div id="storyResult"></div>
+      <div id="storyResult"></div>
     </main>
 
     <footer class="container">
-        <p>
-            Created for Fermyon's
-            <a href="https://github.com/fermyon/advent-of-spin/tree/main/2023/Challenge-3">
-                Advent-of-Spin 2023, Challenge #3
-            </a>.
-        </p>
+      <p>
+        Created for Fermyon's
+        <a
+          href="https://github.com/fermyon/advent-of-spin/tree/main/2023/Challenge-3"
+        >
+          Advent-of-Spin 2023, Challenge #3 </a
+        >.
+      </p>
     </footer>
 
     <script type="text/javascript">
-        const nsToMs = ns => ns / 1e6;
+      const nsToMs = (ns) => ns / 1e6;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const b = document.getElementById('submitButton');
+      document.addEventListener("DOMContentLoaded", () => {
+        const b = document.getElementById("submitButton");
 
-            document.getElementById('storyForm').addEventListener('submit', async () => {
-                event.preventDefault();
+        document
+          .getElementById("storyForm")
+          .addEventListener("submit", async () => {
+            event.preventDefault();
 
-                b.disabled = true;
+            b.disabled = true;
 
-                const jsonPayload = JSON.stringify({
-                    place: document.getElementById('place').value,
-                    characters: document.getElementById('characters').value
-                        .split(',')
-                        .map(el => el.trim()),
-                    objects: document.getElementById('objects').value
-                        .split(',')
-                        .map(el => el.trim()),
-                    style: document.getElementById('style').value,
-                });
+            const jsonPayload = JSON.stringify({
+              place: document.getElementById("place").value,
+              characters: document
+                .getElementById("characters")
+                .value.split(",")
+                .map((el) => el.trim()),
+              objects: document
+                .getElementById("objects")
+                .value.split(",")
+                .map((el) => el.trim()),
+              style: document.getElementById("style").value,
+            });
 
-                const api = document.getElementById('pickGenerator').value;
-                const response = await fetch(`/${api}`, {
-                    method: 'POST',
-                    body: jsonPayload,
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                const jsonData = JSON.parse(await response.text());
+            const api = document.getElementById("pickGenerator").value;
+            const response = await fetch(`/${api}`, {
+              method: "POST",
+              body: jsonPayload,
+              headers: { "Content-Type": "application/json" },
+            });
+            const jsonData = JSON.parse(await response.text());
 
-                document.querySelector('#storyResult').innerHTML = `<article>
+            document.querySelector("#storyResult").innerHTML = `<article>
                     <body>
                         <p>${jsonData.story}</p>
                     </body>
@@ -135,9 +148,9 @@
                     </footer>
                 </article>`;
 
-                b.disabled = false;
-            });
-        });
+            b.disabled = false;
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
