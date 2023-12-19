@@ -6,6 +6,8 @@ Text below is from the [Fermyon repo for 2023 challenge 3][c3repo], with minor e
 
 [c3repo]: https://github.com/fermyon/advent-of-spin/tree/main/2023/Challenge-3
 
+Visit this repo's [webpage](https://aos3.fermyon.app/) for a live demo in your browser.
+
 <hr/>
 
 ## Spec
