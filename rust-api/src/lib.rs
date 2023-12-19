@@ -71,13 +71,6 @@ fn handle_rust_api(req: http::Request<Json<Data>>) -> anyhow::Result<impl IntoRe
 
     let mut status_code = http::StatusCode::INTERNAL_SERVER_ERROR;
 
-    /*
-    println!("starting LLM inference...");
-    let model = llm::InferencingModel::Llama2Chat;
-    let inference = llm::infer(model, &d.to_prompt());
-    println!("LLM inference complete.");
-    */
-
     let inference = llm::infer_with_options(
         llm::InferencingModel::Llama2Chat,
         &d.to_prompt(),

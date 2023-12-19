@@ -10,7 +10,7 @@ import (
 	"time"
 
 	spinhttp "github.com/fermyon/spin/sdk/go/v2/http"
-	// "github.com/fermyon/spin/sdk/go/v2/llm"
+	"github.com/fermyon/spin/sdk/go/v2/llm"
 )
 
 //go:embed styles.json
@@ -77,7 +77,23 @@ type Payload struct {
 }
 
 func generateStoryFromPrompt(prompt string) (string, error) {
-	return prompt, nil
+	inference, err := llm.Infer(
+		"llama2-chat",
+		prompt,
+		&llm.InferencingParams{
+			MaxTokens: 500, // 100,
+			Temperature: 0.9, // 0.8,
+			TopP: 1.0, // 0.9,
+			// defaults
+			RepeatPenalty: 1.1,
+			RepeatPenaltyLastNTokenCount: 64,
+			TopK: 40,
+		},
+	)
+	if err != nil {
+		return "ERROR: Inference failed.", err
+	}
+	return inference.Text, nil
 }
 
 func init() {
