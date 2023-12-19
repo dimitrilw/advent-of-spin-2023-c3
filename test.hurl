@@ -3,7 +3,7 @@
 
 #POST http://localhost:3000/rust-api
 
-POST https://aos-chal-three-beyankc3.fermyon.app/rust-api
+POST https://aos3.fermyon.app/rust-api
 {
     "place": "North Pole",
     "characters": ["Santa Claus", "The Grinch", "a penguin"],
