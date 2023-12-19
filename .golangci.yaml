@@ -1,0 +1,6 @@
+# cSpell: disable
+
+linters:
+  # https://golangci-lint.run/usage/linters/
+  enable:
+    - asasalint
