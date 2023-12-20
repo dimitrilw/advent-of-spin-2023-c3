@@ -66,19 +66,24 @@
             Stole Christmas by Dr. Seuss <br />the screenplay for the movie Elf
           </small>
 
-          <label for="pickGenerator">Pick API</label>
-          <select id="pickGenerator">
+          <label for="pickAPI">Pick API</label>
+          <select id="pickAPI">
             <option value="rust-api" selected>Rust API</option>
             <option value="go-api">Go API</option>
             <option value="py-api">Python API</option>
+            <option value="hybrid-api" disabled>
+              Hybrid API: multi-languages with multiple-binaries (in
+              development)
+            </option>
+            <option value="composed-api" disabled>
+              Composed API: multi-languages composed into a single-binary (in
+              development)
+            </option>
             <option value="javascript-api" disabled>
               Javascript API (in development)
             </option>
             <option value="typescript-api" disabled>
               Typescript API (in development)
-            </option>
-            <option value="component-api" disabled>
-              Component-Model API (in development)
             </option>
           </select>
 
@@ -127,7 +132,7 @@
               style: document.getElementById("style").value,
             });
 
-            const api = document.getElementById("pickGenerator").value;
+            const api = document.getElementById("pickAPI").value;
             const response = await fetch(`/${api}`, {
               method: "POST",
               body: jsonPayload,
