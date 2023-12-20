@@ -69,7 +69,11 @@ WASM binaries into a single binary, even though the source is three different
 languages: Rust, Go, and Python.
 
 <hr/>
+
 Text below is from the [Fermyon repo for 2023 challenge 3][c3repo], with minor edits.
+
+[c3repo]: https://github.com/fermyon/advent-of-spin/tree/main/2023/Challenge-3
+
 <hr/>
 
 ## Spec
