@@ -2,12 +2,74 @@
 
 Fermyon advent-of-spin 2023, challenge 3
 
-Text below is from the [Fermyon repo for 2023 challenge 3][c3repo], with minor edits.
-
-[c3repo]: https://github.com/fermyon/advent-of-spin/tree/main/2023/Challenge-3
-
 Visit this repo's [webpage](https://aos3.fermyon.app/) for a live demo in your browser.
 
+## Components
+
+### fs
+
+Simple filesystem access, for serving files in `/assets` directory. Example:
+`aos3.fermyon.app/index.html` will return the file `assets/index.html`.
+
+### APIs
+
+Multiple API endpoints were created to experiment with different languages.
+Each of the entry APIs receive and return the same JSON template.
+
+#### stand-alone, single-language APIs
+
+Each of these APIs is a single component, in a single file.
+
+##### rust-api
+
+`/rust-api/src/main.rs`, which contains all logic for a simple REST API,
+written in Rust, and initiated with Spin's `http-rust` template.
+
+##### go-api
+
+`/go-api/main.go`, which contains all logic for a simple REST API,
+written in Go, and initiated with Spin's `http-go` template.
+
+##### py-api
+
+`/py-api/main.py`, which contains all logic for a simple REST API,
+written in Python, and initiated with Spin's `http-py` template.
+
+#### complex, multi-language APIs
+
+##### hybrid-api
+
+```diff
+--- IN DEVELOPMENT ---
+```
+
+The `/hybrid-api` endpoint is really a blend of three Spin components,
+each written in a different language, and each with a different purpose.
+
+The `/hybrid-api` endpoint is a simple REST API, written in Rust.
+It receives a JSON object, then it calls the `/hybrid-api/llm` endpoint.
+`/hybrid-api/llm` is the handler for interactions with the LLM, but before
+each interaction, it calls the `/hybrid-api/prompt` endpoint to transform
+the initial JSON object into a prompt for the LLM.
+
+`/hybrid-api/llm` is a simple REST API, written in Go.
+
+`/hybrid-api/prompt` is a simple REST API, written in Python.
+
+##### composed-api
+
+```diff
+--- IN DEVELOPMENT ---
+```
+
+The `/composed-api` endpoint is the same overall logic as the `/hybrid-api`;
+however, instead of using three separate Spin components,
+it uses the Bytecode Alliance's Component Model to compose the three
+WASM binaries into a single binary, even though the source is three different
+languages: Rust, Go, and Python.
+
+<hr/>
+Text below is from the [Fermyon repo for 2023 challenge 3][c3repo], with minor edits.
 <hr/>
 
 ## Spec
