@@ -57,7 +57,7 @@ fn handle_rust_api(req: http::Request<Json<Data>>) -> anyhow::Result<impl IntoRe
         objects: req.body().objects.clone(),
         style: req.body().style.clone(),
     };
-    println!("Rust API, data: {:?}", &d);
+    println!("rust-api, data: {:?}", &d);
 
     if d.style.is_empty() {
         let s: Styles = serde_json::from_str(STYLES)?;
@@ -92,7 +92,7 @@ fn handle_rust_api(req: http::Request<Json<Data>>) -> anyhow::Result<impl IntoRe
 
     let body: String = serde_json::to_string(&p)?;
 
-    println!("Rust API, payload: {:?}", &p);
+    println!("rust-api, payload: {:?}", &p);
 
     Ok(http::Response::builder()
         .status(status_code)

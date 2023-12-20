@@ -102,19 +102,19 @@ func init() {
 
 		d, err := NewDataFromJsonRequest(r)
 		if err != nil {
-			fmt.Println("Go API, error:", err)
+			fmt.Println("go-api, error:", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		fmt.Println("Go API, data:", d)
+		fmt.Println("go-api, data:", d)
 
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 
 		story, err := generateStoryFromPrompt(d.toPrompt())
 		if err != nil {
-			fmt.Println("Go API, error:", err)
+			fmt.Println("go-api, error:", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
@@ -125,7 +125,7 @@ func init() {
 			Nanoseconds: time.Now().UnixNano() - start,
 		}
 
-		fmt.Println("Go API, payload:", p)
+		fmt.Println("go-api, payload:", p)
 
 		json.NewEncoder(w).Encode(p)
 	})

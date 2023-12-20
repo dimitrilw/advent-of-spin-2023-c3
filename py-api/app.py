@@ -59,7 +59,7 @@ def handle_request(request):
 
         data = json.loads(request.body)
 
-        print("Python API, data:", data)
+        print("py-api, data:", data)
 
         if "style" not in data or data["style"] == "":
             data["style"] = pick_random_style()
@@ -74,9 +74,9 @@ def handle_request(request):
             "ns": time.time_ns() - start,
         })
 
-        print("Py API, payload:", payload)
+        print("py-api, payload:", payload)
 
         return Response(200, {"content-type": "application/json"}, bytes(payload, "utf-8"))
     except Exception as e:
-        print("Py API, error:", e)
+        print("py-api, error:", e)
         return Response(500, {"content-type": "text/plain"}, bytes(f"Error: {str(e)}", "utf-8"))
