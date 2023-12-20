@@ -28,7 +28,6 @@ component = "rust-api"
 
 [component.rust-api]
 source = "rust-api/target/wasm32-wasi/release/rust_api.wasm"
-# allowed_outbound_hosts = []
 ai_models = ["llama2-chat"]
 [component.rust-api.build]
 command = "cargo build --target wasm32-wasi --release"
@@ -44,9 +43,23 @@ component = "go-api"
 
 [component.go-api]
 source = "go-api/main.wasm"
-# allowed_outbound_hosts = []
 ai_models = ["llama2-chat"]
 [component.go-api.build]
 command = "cp ../assets/styles.json ./styles.json && tinygo build -target=wasi -gc=leaking -no-debug -o main.wasm main.go"
 workdir = "go-api"
 watch = ["**/*.go", "go.mod"]
+
+# --------------------------------------------------------------------------------------------------
+# /py-api
+
+[[trigger.http]]
+route = "/py-api/..."
+component = "py-api"
+
+[component.py-api]
+source = "py-api/app.wasm"
+ai_models = ["llama2-chat"]
+[component.py-api.build]
+command = "spin py2wasm app -o app.wasm"
+workdir = "py-api"
+watch = ["app.py", "Pipfile"]
